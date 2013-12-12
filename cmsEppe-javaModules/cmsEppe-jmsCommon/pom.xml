@@ -1,0 +1,26 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>gov.hhs.cms.ebs.cmsEppe</groupId>
+		<artifactId>cmsEppe-javaModules</artifactId>
+		<version>0.1</version>
+	</parent>
+	<groupId>gov.hhs.cms.ebs.cmsEppe.cmsEppe-javaModules</groupId>
+	<artifactId>cmsEppe-jmsCommon</artifactId>
+	<version>0.1</version>
+	<packaging>jar</packaging>
+	<name>cmsEppe-jmsCommon</name>
+	<description>CMS EPPE Project - JMS Common Module</description>
+	<dependencies>
+		<dependency>
+			<groupId>gov.hhs.cms.ebs.cmsCommon.cmsCommon-javaModules</groupId>
+			<artifactId>cmsCommon-jms</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>gov.hhs.cms.ebs.cmsEppe.cmsEppe-javaModules</groupId>
+			<artifactId>cmsEppe-serviceApi</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+</project>

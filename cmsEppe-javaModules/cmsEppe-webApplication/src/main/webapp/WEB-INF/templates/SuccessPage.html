@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta name="content-type" content="text/html; charset=ISO-8859-1"/>
+  </head>
+  
+  <body>
+	
+	<h1>Success Page</h1>
+    
+	<div id="leftDiv" class="leftContainerDiv">
+  			<h4 th:text="${welcomeMessage}">WELCOME MESSAGE</h4>
+  			
+  			
+  			<label>Form id:</label>&nbsp; <label th:text="${userObject.userId}"></label> <br/>
+  			
+  			
+  	</div>
+  </body>
+</html>

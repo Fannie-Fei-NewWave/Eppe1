@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/util 
+                           classpath:org/springframework/beans/factory/xml/spring-util-3.0.xsd">
+        
+    <util:list id="eppe-jmsCommon-defaultMarshallerList" list-class="java.util.ArrayList">
+        <bean id="cmsCommon-jms-BooleanMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.BooleanMarshallerUnmarshaller" />
+        <bean id="cmsCommon-jms-ByteArrayMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.ByteArrayMarshallerUnmarshaller" />
+        <bean id="cmsCommon-jms-DateMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.DateMarshallerUnmarshaller" />
+        <bean id="cmsCommon-jms-EnumMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.EnumMarshallerUnmarshaller" />
+        <bean id="cmsCommon-jms-IntegerMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.IntegerMarshallerUnmarshaller" />
+        <bean id="cmsCommon-jms-JibxMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.JibxMarshallerUnmarshaller">
+            <constructor-arg>
+                <list>
+                    <value>jibxBindings/cmsCommon-jms/binding.xml</value>
+                    <value>jibxBindings/cmsSecurity-jms/binding.xml</value>
+                    <value>jibxBindings/eppe-jms/binding.xml</value>
+                </list>
+            </constructor-arg>
+        </bean>
+        <bean id="cmsCommon-jms-LongMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.LongMarshallerUnmarshaller" />
+        <bean id="cmsCommon-jms-PagedByteArrayMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.PagedByteArrayMarshallerUnmarshaller" />              
+        <bean id="cmsCommon-jms-PagerSummaryMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.PagerSummaryMarshallerUnmarshaller" />              
+        <bean id="cmsCommon-jms-StringMU"
+              class="gov.hhs.cms.common.remoting.jms.oxm.StringMarshallerUnmarshaller" />
+    </util:list>  
+    
+    <bean id="eppe-jmsCommon-ObjectTagMapping"
+          class="gov.hhs.cms.common.remoting.jms.ObjectTagMapping">
+        <constructor-arg>
+            <ref bean="eppe-jmsCommon-defaultMarshallerList" />
+        </constructor-arg>
+        <property name="name" value="eppe-ObjectTagMapping" />
+    </bean>    
+</beans>

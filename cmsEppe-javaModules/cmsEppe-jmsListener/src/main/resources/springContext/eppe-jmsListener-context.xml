@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/util 
+                        classpath:org/springframework/beans/factory/xml/spring-util-3.0.xsd">
+
+	<!-- Configure Security Variables -->
+    <bean id="cmsSecurity-applicationId" class="java.lang.Integer">
+        <constructor-arg type="int"><value>4</value></constructor-arg>
+    </bean>
+    
+    <util:list id="cmsSecurity-restrictedRoleIds">
+    </util:list>
+    
+    <util:list id="cmsSecurity-appRoleSortOrder">
+        <value>160</value>
+        <value>162</value>
+        <value>161</value>
+        <value>153</value>
+        <value>152</value>
+        <value>151</value>
+        <value>154</value>
+        <value>110</value>
+        <value>100</value>
+        <value>101</value>
+        <value>102</value>
+    </util:list>
+    
+	<!-- Parent JmsInvokerServiceExporter -->
+	<bean id="eppe-jmsListener-Parent" abstract="true"
+		class="gov.hhs.cms.common.remoting.jms.CmsJmsServiceExporter">
+		<property name="messageTimeToLive" value="60000" />
+	</bean>
+
+    <!-- ehCache Configuration -->
+	<bean id="eppe-ehCacheManagerJmsListener"
+		  class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="cacheManagerName" value="eppe-jmsAuthenticationCache" />	
+        <property name="shared" value="true" />  
+		<property name="configLocation">
+			<value>classpath:/ehCache/serviceJmsListenerEhCache.xml</value>
+		</property>
+	</bean>
+    <bean id="eppe-cache-Authentication" 
+          class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+        <property name="cacheManager" ref="eppe-ehCacheManagerJmsListener" />
+        <property name="cacheName"
+                  value="gov.hhs.cms.ebs.security.model.Authentication" />
+    </bean>
+    <!-- End ehCache Configuration -->
+    
+    <!-- ThrowableEncoder Configuration -->        
+    <util:list id="cmsDataCollection-jmsCommon-defaultThrowableEncoderList" list-class="java.util.ArrayList">
+        <bean id="cmsCommon-jms-HibernateEncoder"
+              class="gov.hhs.cms.common.remoting.jms.encoder.HibernateThrowableEncoder" />
+        <!-- <bean id="cmsCsp-jms-RdisCannotDeleteException"
+              class="gov.hhs.cms.csp.service.jms.common.encoder.RdisCannotDeleteEncoder" /> -->         
+        <bean id="cmsCommon-jms-DefaultEncoder"
+              class="gov.hhs.cms.common.remoting.jms.encoder.DefaultThrowableEncoder" />  
+    </util:list>
+    
+   <bean id="cmsDataCollectin-jmsCommon-ThrowableEncoder"
+          class="gov.hhs.cms.common.remoting.jms.ThrowableMapping">
+        <constructor-arg>
+            <ref bean="cmsDataCollection-jmsCommon-defaultThrowableEncoderList" />
+        </constructor-arg>
+    </bean>       
+
+	<!-- ************************* -->
+	<bean id="eppe-jmsListener.DataZoneRemoteMessageConverter"
+		class="gov.hhs.cms.common.remoting.jms.DataZoneRemoteMessageConverter">
+		<property name="objectTagMapping" ref="eppe-jmsCommon-ObjectTagMapping" />
+		<property name="throwableMapping" ref="cmsDataCollectin-jmsCommon-ThrowableEncoder" />
+		<property name="authenticationProvider" ref="cmsSecurity-SecurityService" />
+		<property name="userCache" ref="eppe-cache-Authentication" />
+	</bean>
+	<alias name="eppe-jmsListener.DataZoneRemoteMessageConverter" 
+	       alias="cmsSecurity-jmsListener-DataZoneRemoteMessageConverter"/>
+	<!-- *************************** -->
+
+	<!-- ******* JMS Service Definitions -->
+	<bean id="eppe-jmsListener-DataExchangeService" parent="eppe-jmsListener-Parent">
+		<property name="serviceInterface" value="gov.hhs.cms.eppe.service.DataExchangeService" />
+		<property name="service" ref="eppe-serviceImpl-DataExchangeService" />
+		<property name="messageConverter"
+			      ref="eppe-jmsListener.DataZoneRemoteMessageConverter" />
+	</bean>
+	
+
+	<!-- ******* Listening Containers -->
+	<bean name="eppe-jmsListener-DataExchangeService-Container"
+		  parent="eppe-jmsListenerContainer-Parent">
+		<property name="destination"
+			      ref="eppe-jmsDAS-DataExchange-RequestQueue" />
+		<property name="messageListener" ref="eppe-jmsListener-DataExchangeService" />
+	</bean>
+	
+	<!-- ******* Security Service Definition -->
+	<!-- Temporary Security Service. This should be removed when security module is integrated -->
+	<bean id="cmsSecurity-SecurityService" class="gov.hhs.cms.ebs.security.service.logic.SecrityLogic" />
+	
+
+</beans>

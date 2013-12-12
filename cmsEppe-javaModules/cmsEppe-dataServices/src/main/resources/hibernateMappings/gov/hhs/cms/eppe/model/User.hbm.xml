@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.hhs.cms.eppe.vo">
+        <class name="UserVO" table="SYS_USER">
+        	<meta attribute="class-description">
+        		This class contains the user details.
+        	</meta>
+                
+               <id name="requestId" column="SYS_RQST_ID" type="int">
+                      <generator class="increment"/>
+               </id>
+               <property name="userId" column="SYS_USER_ID" type="string"/>
+               <property name="userFirstName" column="SYS_USER_1ST_NAME" type="string"/>
+               <property name="userLastName" column="SYS_USER_LAST_NAME" type="string"/> 
+               <property name="userEmailAdr" column="SYS_USER_EMAIL_ADR" type="string"/>
+               <property name="userStrAdr1" column="SYS_USER_ST_1_ADR" type="string"/>
+               <property name="userStrAdr2" column="SYS_USER_ST_2_ADR" type="string"/>
+               <property name="userIdCreat" column="SYS_CREAT_USER_ID" type="string"/>
+               <property name="userIdUpdt" column="SYS_UPDT_USER_ID" type="string"/>
+               <property name="userStrCityName" column="SYS_USER_ST_CITY_NAME" type="string"/>
+               <property name="userStrState" column="SYS_USER_ST_STATE_CD" type="string"/>
+               <property name="userStrZip" column="SYS_USER_ST_ZIP_CD" type="int"/>
+               <property name="personPrexCode" column="PRSN_PREX_CD" type="int"/>
+               <property name="userTypeCode" column="SYS_USER_TYPE_CD" type="int"/>
+               <property name="userStusCode" column="SYS_USER_STUS_CD" type="int"/>
+               <property name="perSfxCode" column="PRSN_SFX_CD" type="int"/>
+               <property name="userPhoneNumber" column="SYS_USER_ST_PHNE_NUM" type="int"/>
+               <property name="creatTs" column="SYS_CREAT_TS" type="date"/>
+               <property name="updateTs" column="SYS_UPDT_TS" type="date"/>                                   
+        </class>
+               
+</hibernate-mapping>

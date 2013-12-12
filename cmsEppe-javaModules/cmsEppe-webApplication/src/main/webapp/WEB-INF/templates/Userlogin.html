@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></meta>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<title>Login Page</title>
+</head>
+<body>
+	<div id ="title">
+		<h2 style="text-align:center;"><em>User Login...</em></h2>
+		<hr/>
+				
+	</div>
+	
+	<form id="form_1" th:object="${userObject}" action="Message.html" autocomplete="on">
+		<fieldset>
+		<div>
+			<label for="userId" ><b>Please enter your userid:</b></label>
+			<input type = "text" name ="userid" th:field ="*{userId}" autofocus="autofocus"/>
+		</div>
+		<div>
+			<button id ="button" type="submit" name="button"><b> Submit</b></button>
+		</div>
+		
+	</fieldset>
+	</form>
+	
+	<script th:inline="javascript">
+
+    	
+    	(function() {
+							
+			var saveUserUrl = /*[[${saveOrUpdateDuaUrl}]]*/ test;
+			
+			$('#form_1').attr('action',saveUserUrl);
+			
+			//$('#secondPageLink').attr('href',secondPageUrl);
+		})();
+    	
+		
+	</script>
+
+
+</body>
+</html>

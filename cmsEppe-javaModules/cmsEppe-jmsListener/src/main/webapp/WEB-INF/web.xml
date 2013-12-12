@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	id="WebApp_1224681984137" version="2.4"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	<description>EPPE JMS Listener</description>
+
+    <listener>
+        <description>JEE Listener that bootstraps the Log4j Logging Engine</description>
+        <listener-class>com.newwave.common.logging.log4j.Log4jConfiguringListenerProperties</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>springDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                classpath:/springContext/eppe-jmsCommon-context.xml
+                classpath:/springContext/eppe-daoHibernate-context.xml
+                classpath:/springContext/eppe-serviceImpl-context.xml
+                classpath:/springContext/eppe-jmsListenerBootstrap-context.xml
+                classpath:/springContext/eppe-jmsListener-context.xml
+                classpath:/springContext/eppe-dataServiceHibernateBootstrap.xml
+               <!--  classpath:/springContext/cmsSecurity-securityServiceJmsListenerBootstrap.xml
+                classpath:/springContext/cmsSecurity-securityServiceJmsListener.xml
+                classpath:/springContext/cmsSecurity-securityDataAccessHibernate.xml
+                classpath:/springContext/cmsSecurity-securityServiceLogic.xml
+                classpath:/springContext/cmsSecurity-securityServiceJmsCommon.xml -->   
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>   
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    <resource-ref>
+        <res-ref-name>jdbc/EPPEDb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>   
+    <!-- <resource-ref>
+        <res-ref-name>jdbc/IACSSecurity</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref> -->
+    <resource-ref >
+        <description></description>
+        <res-ref-name>jms/das1QCF</res-ref-name>
+        <res-type>javax.jms.QueueConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <resource-ref >
+        <description></description>
+        <res-ref-name>jms/eppeDASDataExchangeRequest</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>     
+   <!--  <resource-ref >
+        <description></description>
+        <res-ref-name>jms/eppeDASSecurityRequest</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref> -->   	
+</web-app>

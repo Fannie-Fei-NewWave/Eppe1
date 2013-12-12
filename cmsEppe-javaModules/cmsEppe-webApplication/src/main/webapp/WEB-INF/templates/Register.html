@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Register..</title>
+</head>
+<body>
+	<div id ="title1">
+		<h2 style="text-align:center;"><i>Register..</i></h2>
+		
+	<form id="form_2" th:object="${orgnameObejct}" action="Success.html" autocomplete="on">
+			<div>
+			<label for="orgname" ><b>Organization Name: </b></label>
+			<select id="orgnameoption" size =1 autofocus="autofocus">
+				<option value="Org1">Org1</option>
+				<option value="Org2">Org2</option>
+				<option value="Org3">Org3</option>
+				<option value="Org4">Org4</option>
+			</select>
+			
+			<!-- <input type = "text" name ="orgname" autofocus th:field ="*{}"/> -->
+		</div>
+		<div>
+		<button id ="button1" type="submit" name="button1"><b>submit</b></button>
+		</div>
+
+	</form>
+				
+	</div>
+
+
+</body>
+</html>

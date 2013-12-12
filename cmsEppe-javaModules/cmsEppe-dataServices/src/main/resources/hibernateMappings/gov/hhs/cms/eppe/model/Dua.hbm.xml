@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.hhs.cms.eppe.vo">
+       <!--  <class name="DuaVO" table="DUA">
+                <id name="duaId" column="DUA_ID" type="int">
+                      <generator class="sequence">
+                              <param name="sequence">DUA_ID_SEQ</param>
+                      </generator>                       
+              </id>
+            <property name="duaName" column="DUA_NAME" type="string" />       
+        </class> -->
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.hhs.cms.eppe.vo">
+        <class name="UserRoleVO" table="SYS_USER_ROLE">
+        	<meta attribute="class-description">
+        		This class contains the user role details.
+        	</meta>
+                
+               <id name="roleId" column="SYS_ROLE_ID" type="int">
+                      <generator class="increment"/>
+               </id>
+               <property name="userId" column="SYS_USER_ID" type="string"/>
+               <property name="userUpdtUserId" column="SYS_UPDT_USER_ID" type="string"/>
+               <property name="userIdCreat" column="SYS_CREAT_USER_ID" type="string"/>
+               <property name="userEntId" column="SYS_ENT_ID" type="string"/>
+               <property name="updateTs" column="SYS_UPDT_TS" type="dateTime"/>
+               <property name="userEfctDt" column="SYS_USER_EFCTV_DT" type="dateTime"/>
+               <property name="creatTs" column="SYS_CREAT_TS" type="date"/>
+               <property name="userTrmntnDt" column="SYS_USER_TRMNTN_DT" type="date"/>                                                              
+        </class>     
+</hibernate-mapping>

@@ -1,0 +1,8 @@
+target
+.settings
+.project
+.classpath
+.buildNumber
+version.properties
+.myeclipse
+pom.xml.versionsBackup

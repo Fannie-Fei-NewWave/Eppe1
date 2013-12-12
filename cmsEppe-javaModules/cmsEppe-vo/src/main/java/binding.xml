@@ -1,0 +1,44 @@
+<binding name="binding" package="gov.hhs.cms.eppe.vo" trim-whitespace="true">
+  <mapping abstract="true" type-name="DuaVO" class="gov.hhs.cms.eppe.vo.DuaVO">
+    <value style="element" name="duaId" get-method="getDuaId" set-method="setDuaId"/>
+    <value style="element" name="duaName" get-method="getDuaName" set-method="setDuaName"/>
+  </mapping>
+  <mapping class="gov.hhs.cms.eppe.vo.DuaVO" name="DuaVO">
+    <structure map-as="DuaVO"/>
+  </mapping>
+  <mapping abstract="true" type-name="UserVO" class="gov.hhs.cms.eppe.vo.UserVO">
+    <value style="element" name="requestId" get-method="getRequestId" set-method="setRequestId"/>
+    <value style="element" name="userId" get-method="getUserId" set-method="setUserId" usage="optional"/>
+    <value style="element" name="userFirstName" get-method="getUserFirstName" set-method="setUserFirstName" usage="optional"/>
+    <value style="element" name="userLastName" get-method="getUserLastName" set-method="setUserLastName" usage="optional"/>
+    <value style="element" name="userEmailAdr" get-method="getUserEmailAdr" set-method="setUserEmailAdr" usage="optional"/>
+    <value style="element" name="userStrAdr1" get-method="getUserStrAdr1" set-method="setUserStrAdr1" usage="optional"/>
+    <value style="element" name="userStrAdr2" get-method="getUserStrAdr2" set-method="setUserStrAdr2" usage="optional"/>
+    <value style="element" name="userIdCreat" get-method="getUserIdCreat" set-method="setUserIdCreat" usage="optional"/>
+    <value style="element" name="userIdUpdt" get-method="getUserIdUpdt" set-method="setUserIdUpdt" usage="optional"/>
+    <value style="element" name="userStrCityName" get-method="getUserStrCityName" set-method="setUserStrCityName" usage="optional"/>
+    <value style="element" name="userStrState" get-method="getUserStrState" set-method="setUserStrState" usage="optional"/>
+    <value style="element" name="userStrZip" get-method="getUserStrZip" set-method="setUserStrZip" usage="optional"/>
+    <value style="element" name="personPrexCode" get-method="getPersonPrexCode" set-method="setPersonPrexCode" usage="optional"/>
+    <value style="element" name="userTypeCode" get-method="getUserTypeCode" set-method="setUserTypeCode" usage="optional"/>
+    <value style="element" name="userStusCode" get-method="getUserStusCode" set-method="setUserStusCode" usage="optional"/>
+    <value style="element" name="perSfxCode" get-method="getPerSfxCode" set-method="setPerSfxCode" usage="optional"/>
+    <value style="element" name="userPhoneNumber" get-method="getUserPhoneNumber" set-method="setUserPhoneNumber" usage="optional"/>
+    <value style="element" name="CreatTs" get-method="getCreatTs" set-method="setCreatTs" usage="optional"/>
+    <value style="element" name="UpdateTs" get-method="getUpdateTs" set-method="setUpdateTs" usage="optional"/>
+  </mapping>
+  <mapping class="gov.hhs.cms.eppe.vo.UserVO" name="UserVO">
+    <structure map-as="UserVO"/>
+  </mapping>
+  <mapping abstract="true" type-name="UserRoleVO" class="gov.hhs.cms.eppe.vo.UserRoleVO">
+    <value style="element" name="roleId" get-method="getRoleId" set-method="setRoleId"/>
+    <value style="element" name="userId" get-method="getUserId" set-method="setUserId" usage="optional"/>
+    <value style="element" name="userUpdtUserId" get-method="getUserUpdtUserId" set-method="setUserUpdtUserId" usage="optional"/>
+    <value style="element" name="userIdCreat" get-method="getUserIdCreat" set-method="setUserIdCreat" usage="optional"/>
+    <value style="element" name="userEntId" get-method="getUserEntId" set-method="setUserEntId" usage="optional"/>
+    <value style="element" name="updateTs" get-method="getUpdateTs" set-method="setUpdateTs" usage="optional"/>
+    <value style="element" name="userEfctvDt" get-method="getUserEfctvDt" set-method="setUserEfctvDt" usage="optional"/>
+    <value style="element" name="creatTs" get-method="getCreatTs" set-method="setCreatTs" usage="optional"/>
+    <value style="element" name="userTrmntnDt" get-method="getUserTrmntnDt" set-method="setUserTrmntnDt" usage="optional"/>
+  </mapping>
+</binding>

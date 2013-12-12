@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.hhs.cms.eppe.vo">
+        <class name="OrgUserVO" table="ORGANIZATION_USR">
+        	<meta attribute="class-description">
+        		This class contains the Organization User details.
+        	</meta>
+                <id name="personId" column="PERSON_SUFFIX_CD" type="int">
+                      <generator class="increment"/>
+               </id>
+            <property name="userId" column="SYS_USR_ID" type="string"/> 
+            <property name="orgId" column="ORGANIZATION_IDENT" type="int"/>
+            <property name="userIdUpdt" column="SYS_UPDT_USER_ID" type="string"/>
+            <property name="userIdCreat" column="SYS_CREAT_USER_ID" type="string"/>
+            <property name="orgUserEfctDt" column="ORGANIZATION_USR_EFFECTIVE_DT" type="date"/>
+            <property name="orgUserTerm" column="ORGANIZATION_USR_TERMINATION" type="date"/>
+            <property name="updateTs" column="SYS_UPDT_TS" type="date"/>
+            <property name="creatTs" column="SYS_CREAT_TS" type="date"/>                 
+        </class>
+</hibernate-mapping>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         id="WebApp_1224681984137" 
+         version="2.4" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+    <description>EPPE Web Application</description>
+   
+    <listener>
+        <description>JEE Listener that bootstraps the Log4j Logging Engine</description>
+        <listener-class>com.newwave.common.logging.log4j.Log4jConfiguringListenerProperties</listener-class>
+    </listener>
+    
+    
+   <!-- <filter>
+        <filter-name>cmsCsp-web-securityFilter</filter-name>
+        <filter-class>gov.hhs.cms.ebs.security.web.CmsSecurityFilterNonRestrictive</filter-class>
+         <init-param>
+             <param-name>applicationId</param-name>
+             <param-value>4</param-value>
+         </init-param>
+         <init-param>
+             <param-name>cmsSecurityServiceBeanName</param-name>
+             <param-value>cmsSecurity-serviceClient-SecurityService</param-value>
+         </init-param>
+    </filter>    
+     
+    <filter-mapping>
+        <filter-name>cmsCsp-web-securityFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>  -->
+    
+    <servlet>
+		<servlet-name>view-servlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.ViewRendererServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<servlet-mapping>
+		<servlet-name>view-servlet</servlet-name>
+		<url-pattern>/WEB-INF/servlet/view</url-pattern>
+	</servlet-mapping>
+      
+
+    <servlet>
+        <servlet-name>springDispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                classpath:/springContext/eppe-jmsCommon-context.xml
+                classpath:/springContext/eppe-jmsClientBootstrap-context.xml
+                classpath:/springContext/eppe-jmsClient-context.xml
+               <!--  classpath:/springContext/cmsSecurity-securityServiceJmsCommon.xml
+                classpath:/springContext/cmsSecurity-securityServiceJmsClientBoostrap.xml
+                classpath:/springContext/cmsSecurity-securityServiceJmsClient.xml -->
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>   
+    <servlet-mapping>
+        <servlet-name>springDispatcher</servlet-name>
+        <url-pattern>/spring/messagebroker/*</url-pattern>
+    </servlet-mapping>
+    
+    <resource-ref >
+        <description></description>
+        <res-ref-name>jms/app1QCF</res-ref-name>
+        <res-type>javax.jms.QueueConnectionFactory</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <resource-ref >
+        <description></description>
+        <res-ref-name>jms/eppeAPPDataExchangeRequest</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>     
+    <resource-ref >
+        <description></description>
+        <res-ref-name>jms/eppeAPPDataExchangeResponse</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>
+    <!-- <resource-ref >
+        <description></description>
+        <res-ref-name>jms/eppeAPPSecurityRequest</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>  
+    <resource-ref >
+        <description></description>
+        <res-ref-name>jms/eppeAPPSecurityResponse</res-ref-name>
+        <res-type>javax.jms.Queue</res-type>
+        <res-auth>Container</res-auth>
+        <res-sharing-scope>Shareable</res-sharing-scope>
+    </resource-ref>    --> 
+</web-app>

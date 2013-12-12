@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+                           http://www.springframework.org/schema/util 
+                           classpath:org/springframework/beans/factory/xml/spring-util-3.0.xsd">
+    
+    <!-- ************************* -->
+    <bean id="eppe-jmsClient.AppZoneRemoteMessageConverter"
+          class="gov.hhs.cms.common.remoting.jms.AppZoneRemoteMessageConverter">
+        <property name="objectTagMapping" ref="eppe-jmsCommon-ObjectTagMapping" />
+        <property name="serviceName" value="MARKER" />
+        <property name="applicationId" value="4" />
+    </bean>
+    
+    <alias name="eppe-jmsClient.AppZoneRemoteMessageConverter" alias="cmsSecurity-jmsClient.AppZoneRemoteMessageConverter"/>
+    <!-- *************************** -->   
+    
+    <bean id="eppe-serviceClient-DataExchangeService"
+          class="gov.hhs.cms.common.remoting.jms.CmsJmsServiceInvoker">
+        <property name="connectionFactory" ref="connectionFactory" />          
+        <property name="serviceInterface" value="gov.hhs.cms.eppe.service.DataExchangeService" />
+        <property name="messageConverter" ref="eppe-jmsClient.AppZoneRemoteMessageConverter" />
+        <property name="queue" ref="eppe-jmsAPP-DataExchange-RequestQueue" />
+        <property name="responseQueue" ref="eppe-jmsAPP-DataExchange-ResponseQueue" />
+        <property name="timeToLive" value="60000" />
+        <property name="receiveTimeout" value="60000" />            
+    </bean>   
+    
+    <!-- <bean id="cmsSecurity-serviceClient-SecurityService"
+          class="gov.hhs.cms.common.remoting.jms.CmsJmsServiceInvoker">
+        <property name="connectionFactory" ref="connectionFactory" />          
+        <property name="serviceInterface" value="gov.hhs.cms.ebs.security.service.SecurityService" />
+        <property name="messageConverter" ref="eppe-jmsClient.AppZoneRemoteMessageConverter" />
+        <property name="queue" ref="cmsSecurity-serviceJmsClient-SecurityService-RequestQueue" />
+        <property name="responseQueue" ref="cmsSecurity-serviceJmsClient-SecurityService-ResponseQueue" />
+        <property name="timeToLive" value="60000" />
+        <property name="receiveTimeout" value="60000" />            
+    </bean> -->
+    
+         
+</beans>

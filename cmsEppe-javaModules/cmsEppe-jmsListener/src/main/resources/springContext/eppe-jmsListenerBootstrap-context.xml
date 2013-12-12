@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		                    classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+							http://www.springframework.org/schema/context 
+							classpath:org/springframework/context/config/spring-context-3.0.xsd
+			                http://www.springframework.org/schema/jee 
+			                classpath:org/springframework/ejb/config/spring-jee-3.0.xsd
+			                http://www.springframework.org/schema/aop 
+			                classpath:org/springframework/aop/config/spring-aop-3.0.xsd
+							http://www.springframework.org/schema/tx 
+							classpath:org/springframework/transaction/config/spring-tx-3.0.xsd">
+    <!-- Transaction Manager -->					        					   
+	<bean id="transactionManager" class="org.springframework.transaction.jta.WebSphereUowTransactionManager" />
+
+    <!-- Task Executor -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.commonj.WorkManagerTaskExecutor">
+        <property name="workManagerName" value="wm/default" />
+    </bean>
+   
+    <!-- JMS Connection Factory -->
+	<jee:jndi-lookup id="connectionFactory" jndi-name="java:comp/env/jms/das1QCF" />
+	
+	<!-- Queue Definitions -->            
+	<jee:jndi-lookup id="eppe-jmsDAS-DataExchange-RequestQueue" 
+	                 jndi-name="jms/eppeDASDataExchangeRequest" />	
+	<!-- <jee:jndi-lookup id="cmsSecurity-serviceJmsListener-SecurityService-RequestQueue" 
+                     jndi-name="jms/eppeDASSecurityRequest" />       -->           	                                    
+               	                 
+		
+	<!-- JMS Listening Containers -->
+    <bean name="eppe-jmsListenerContainer-Parent"
+          abstract="true"
+          class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="concurrentConsumers" value="1"/>
+        <property name="transactionManager" ref="transactionManager" />  
+        <property name="taskExecutor" ref="taskExecutor" />    
+    </bean>
+
+</beans>   

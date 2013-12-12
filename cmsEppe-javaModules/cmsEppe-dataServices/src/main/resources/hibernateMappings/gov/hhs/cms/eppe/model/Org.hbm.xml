@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="gov.hhs.cms.eppe.vo">
+        <class name="OrgVO" table="ORG">
+        	<meta attribute="class-description">
+        		This class contains the Organization details.
+        	</meta>
+                
+                <id name="orgId" column="ORG_ID" type="int">
+                      <generator class="increment"/>
+               </id>
+              
+            <property name="orgName" column="ORG_NAME" type="string"/>
+            <property name="orgExprdDuaInd" column="ORG_EXPRD_DUA_IND" type="string"/>
+            <property name="userIdUpdt" column="SYS_UPDT_USER_ID" type="string"/>
+            <property name="userIdCreat" column="SYS_CREAT_USER_ID" type="string"/>
+            <property name="orgTrmntnDt" column="ORG_TRMNTN_DT" type="date"/>
+            <property name="updateTs" column="SYS_UPDT_TS" type="date"/>
+            <property name="orgUnathEfctDt" column="ORG_UNATHRZD_EFCTV_DT" type="date"/>
+            <property name="orgEfctDt" column="ORG_EFCTV_DT" type="date"/>
+            <property name="creatTs" column="SYS_CREAT_TS" type="date"/>
+            <property name="orgUnathRsnCd" column="ORG_UNATHRZD_RSN_CD" type="int"/>
+                   
+        </class>
+</hibernate-mapping>

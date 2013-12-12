@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta name="content-type" content="text/html; charset=ISO-8859-1"/>
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  </head>
+  
+  <body>
+  	
+  	<div id="bodyWrapper" class="wrapper">
+  		
+  		<div id="leftDiv" class="leftContainerDiv">
+  			<h4 th:text="${welcomeMessage}">WELCOME MESSAGE</h4>
+  			<h4 th:text="${userid}">USER ID</h4><br/>
+  			
+  			<!-- <label>Form id:</label>&nbsp; <label th:text="${testForm.formId}"></label> <br/>
+  			<label>Name:</label>&nbsp; <label th:text="${testForm.name}"></label> <br/>
+  			<label>Url:</label>&nbsp; <label th:text="${testForm.url}"></label> <br/> -->
+  			
+  			<form id="form_1" th:object="${userObject}" action="hello.html">
+      
+		      <fieldset>
+		      
+		        <div>
+		          <label for="userId">Name: </label>
+		          <input type="text" th:field="*{userId}"/>
+		        </div>
+		
+		        <div>
+		          <button id="submitButton" type="submit" name="save" >Save Dua</button>
+		        </div>
+		      
+		      </fieldset>
+		      
+		    </form>
+  		</div>
+  		
+  	</div>
+  	
+  	<script th:inline="javascript">
+
+    	
+    	(function() {
+		
+			
+			
+			var saveDuaUrl = /*[[${checkorUpdateUserUrl}]]*/ test;
+			
+			$('#form_1').attr('action',saveDuaUrl);
+			
+			
+			
+			//$('#secondPageLink').attr('href',secondPageUrl);
+			
+		})();
+    	
+		
+	</script>
+  </body>
+</html>
